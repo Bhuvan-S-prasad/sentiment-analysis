@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sentiment Analyzer</title>
+
+    <!-- Google Fonts: Poppins -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <button id="aboutBtn" class="info-btn" title="About the project">
+
+            <i class="fas fa-info-circle"></i>
+
+        </button>
+
+        <h1>Sentiment Analyzer</h1>
+
+        <p class="subtitle">Type a sentence and get instant sentiment analysis</p>
+
+        <div class="input-area">
+
+            <textarea id="inputText" placeholder="Enter your text here..."></textarea>
+
+            <button id="analyzeButton">Analyze</button>
+
+        </div>
+
+        <div id="result" class="result-box hidden">
+
+            <div class="sentiment-result">
+
+                <span id="emoji"></span>
+
+                <span id="sentiment-text"></span>
+
+            </div>
+
+            <div id="confidenceScores" class="scores">
+
+                <!-- Progress bars will be created here -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div id="aboutModal" class="modal hidden">
+
+        <div class="modal-content">
+
+            <button class="modal-close" aria-label="Close modal">
+
+                <i class="fas fa-times"></i>
+
+            </button>
+
+            <div class="modal-header">
+
+                <h2>Project Overview</h2>
+
+                <p class="modal-subtitle">Advanced Sentiment Analysis System</p>
+
+            </div>
+
+
+
+            <div class="about-section">
+
+                <div class="process-step">
+
+                    <i class="fas fa-database process-icon"></i>
+
+                    <h3>Data Preparation</h3>
+
+                    <ul>
+
+                        <li>Custom dataset with game reviews and social media content</li>
+
+                        <li>Multi-class sentiment classification (Positive, Negative, Neutral, Irrelevant)</li>
+
+                        <li>Comprehensive text preprocessing pipeline including:
+
+                            <ul>
+
+                                <li>URL and mention removal</li>
+
+                                <li>Hashtag cleaning</li>
+
+                                <li>Number removal</li>
+
+                                <li>HTML entity handling</li>
+
+                                <li>Case normalization</li>
+
+                                <li>Punctuation removal</li>
+
+                            </ul>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <div class="process-step">
+
+                    <i class="fas fa-microchip process-icon"></i>
+
+                    <h3>Model Architecture</h3>
+
+                    <ul>
+
+                        <li>Built on HuggingFace Transformers framework</li>
+
+                        <li>Fine-tuned transformer model for sentiment classification</li>
+
+                        <li>Optimized for 4-class sentiment prediction</li>
+
+                        <li>Maximum sequence length: 128 tokens</li>
+
+                        <li>Softmax activation for probability distribution</li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <div class="process-step">
+
+                    <i class="fas fa-graduation-cap process-icon"></i>
+
+                    <h3>Features</h3>
+
+                    <ul>
+
+                        <li>Real-time sentiment analysis</li>
+
+                        <li>Confidence scores for all sentiment classes</li>
+
+                        <li>Robust text preprocessing</li>
+
+                        <li>GPU acceleration support</li>
+
+                        <li>RESTful API integration</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="performance-grid">
+
+                <div class="metric-card">
+
+                    <div class="metric-value">94.6%</div>
+
+                    <div class="metric-title">Accuracy</div>
+
+                    <div class="metric-sub">Validation Set</div>
+
+                </div>
+
+                <div class="metric-card">
+
+                    <div class="metric-value">94.6%</div>
+
+                    <div class="metric-title">F1 Score</div>
+
+                    <div class="metric-sub">Weighted Average</div>
+
+                </div>
+
+                <div class="metric-card">
+
+                    <div class="metric-value">94.6%</div>
+
+                    <div class="metric-title">ROUGE-1</div>
+
+                    <div class="metric-sub">Text Similarity</div>
+
+                </div>
+
+                <div class="metric-card">
+
+                    <div class="metric-value">0.26</div>
+
+                    <div class="metric-title">Loss</div>
+
+                    <div class="metric-sub">Evaluation</div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="process-step">
+
+                <i class="fas fa-chart-bar process-icon"></i>
+
+                <h3>Class-wise Performance</h3>
+
+                <div class="class-metrics">
+
+                    <div class="class-metric">
+
+                        <span class="label">Irrelevant:</span>
+
+                        <span class="value">Precision: 96%, Recall: 91%, F1: 93%</span>
+
+                    </div>
+
+                    <div class="class-metric">
+
+                        <span class="label">Negative:</span>
+
+                        <span class="value">Precision: 98%, Recall: 94%, F1: 96%</span>
+
+                    </div>
+
+                    <div class="class-metric">
+
+                        <span class="label">Neutral:</span>
+
+                        <span class="value">Precision: 91%, Recall: 96%, F1: 94%</span>
+
+                    </div>
+
+                    <div class="class-metric">
+
+                        <span class="label">Positive:</span>
+
+                        <span class="value">Precision: 94%, Recall: 96%, F1: 95%</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="tech-section">
+
+                <h3>Technical Stack</h3>
+
+                <div class="tech-grid">
+
+                    <div class="tech-item">
+
+                        <i class="fab fa-python"></i>
+
+                        <span>Python 3.12</span>
+
+                    </div>
+
+                    <div class="tech-item">
+
+                        <i class="fas fa-brain"></i>
+
+                        <span>PyTorch</span>
+
+                    </div>
+
+                    <div class="tech-item">
+
+                        <i class="fas fa-project-diagram"></i>
+
+                        <span>Transformers</span>
+
+                    </div>
+
+                    <div class="tech-item">
+
+                        <i class="fas fa-server"></i>
+
+                        <span>Flask API</span>
+
+                    </div>
+
+                    <div class="tech-item">
+
+                        <i class="fas fa-bolt"></i>
+
+                        <span>CUDA Support</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/Bhuvan-S-prasad" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/bhuvan-s-prasad" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:bhuvansprasad20@gmail.com" title="Email">
+
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <div class="copyright">
+                © 2024 Bhuvan S. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

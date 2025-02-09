@@ -1,0 +1,15 @@
+artifact_uri: file:///c:/Users/bhuva/Desktop/projects_2025/LLM/notebook/mlruns/0/2aed4ead88364d2fbb3e8d8a1083b765/artifacts
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2aed4ead88364d2fbb3e8d8a1083b765
+run_name: C:\Users\bhuva\Desktop\projects_2025\LLM\output
+run_uuid: 2aed4ead88364d2fbb3e8d8a1083b765
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739083928154
+status: 1
+tags: []
+user_id: bhuva

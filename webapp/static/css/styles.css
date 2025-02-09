@@ -1,0 +1,468 @@
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #6B8AF2, #4B6BE8);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin: 0;
+}
+
+.subtitle {
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+.input-area {
+  margin-top: 1.5rem;
+  max-width: 500px;  /* Add this */
+  margin-left: auto; /* Add these two lines */
+  margin-right: auto;
+}
+
+textarea {
+  width: 100%;  /* Keep this */
+  height: 150px;
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: none;
+  transition: border 0.3s ease;
+  background: #f9f9f9;
+  display: block;  /* Add this */
+  margin: 0 auto;  /* Add this */
+}
+
+textarea:focus {
+  border-color: #4B6BE8;
+  outline: none;
+}
+
+button#analyzeButton {
+  margin-top: 1rem;
+  background: #4B6BE8;
+  border: none;
+  border-radius: 50px;
+  padding: 0.75rem 2rem;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block;  /* Add this */
+  margin-left: auto;  /* Add these two lines */
+  margin-right: auto;
+}
+
+button#analyzeButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  background: #3955C4;
+}
+
+/* Hide result box initially */
+.hidden {
+  display: none !important;
+}
+
+.result-box {
+  margin-top: 2rem;
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  animation: fadeIn 0.5s forwards;
+}
+
+.sentiment-result {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.sentiment-result #emoji {
+  font-size: 2rem;
+  margin-right: 0.5rem;
+}
+
+.scores {
+  text-align: left;
+}
+
+.score {
+  margin-bottom: 1rem;
+}
+
+.score-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background-color: #eee;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4B6BE8;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+  button#analyzeButton {
+    padding: 0.65rem 1.5rem;
+    font-size: 0.9rem;
+  }
+} 
+
+.info-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  font-size: 1.5rem;
+  color: #4B6BE8;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1001;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-btn:hover {
+  transform: rotate(180deg);
+  background: #4B6BE8;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  position: relative; /* Important for absolute positioning of close button */
+  width: 90%;
+  max-width: 800px;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.modal-header h2 {
+  font-size: 2.2rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.modal-subtitle {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+.process-step {
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease;
+}
+
+.process-step:hover {
+  transform: translateY(-3px);
+  border-left: 3px solid #4B6BE8;
+}
+
+.process-step h3 {
+  color: #3498db;
+  margin: 1rem 0;
+  font-size: 1.3rem;
+}
+
+.process-step ul {
+  list-style: none;
+  padding-left: 1.5rem;
+}
+
+.process-step li {
+  margin-bottom: 0.8rem;
+  position: relative;
+}
+
+.process-step li:before {
+  content: "▹";
+  color: #e74c3c;
+  position: absolute;
+  left: -1.3rem;
+}
+
+.process-icon {
+  font-size: 2rem;
+  color: #4B6BE8;
+  background: #F0F4FF;
+  padding: 1rem;
+  border-radius: 50%;
+}
+
+.performance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+
+.metric-card {
+  background: white;
+  padding: 1.2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.metric-value {
+  font-size: 2rem;
+  color: #4B6BE8;
+  margin-bottom: 0.5rem;
+}
+
+.metric-title {
+  color: #34495e;
+  margin: 0.5rem 0;
+}
+
+.metric-sub {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.tech-section {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #ecf0f1;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.tech-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.tech-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.tech-item i {
+  font-size: 1.5rem;
+  color: #4B6BE8;
+}
+
+/* Add close button styling */
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f8f9fa;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #666;
+  transition: all 0.3s ease;
+  z-index: 1002;
+}
+
+.modal-close:hover {
+  background: #ff4757;
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Remove the previous conflicting modal-close styles */
+.modal-close {
+  display: flex !important;
+  background: #f8f9fa !important;
+  padding: 0 !important;
+}
+
+.class-metrics {
+  margin-top: 1rem;
+}
+
+.class-metric {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.class-metric:hover {
+  transform: translateX(5px);
+  background: #F0F4FF;
+}
+
+.class-metric .label {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-right: 0.5rem;
+}
+
+.class-metric .value {
+  color: #7f8c8d;
+}
+
+/* Enhanced Footer Styles */
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to bottom, #1a2234, #1C2635);
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.social-links a {
+    color: rgba(203, 213, 225, 0.8);
+    font-size: 1.6rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 50%;
+}
+
+.social-links a:hover {
+    color: #fff;
+    transform: translateY(-2px) scale(1.1);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.copyright {
+    color: rgba(203, 213, 225, 0.6);
+    font-size: 0.85rem;
+    text-align: center;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+}
+
+/* Update container margin for footer */
+.container {
+    margin-bottom: 100px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer {
+        padding: 0.75rem 0;
+    }
+
+    .container {
+        margin-bottom: 120px;
+    }
+    
+    .social-links {
+        gap: 2rem;
+    }
+
+    .social-links a {
+        font-size: 1.4rem;
+    }
+} 
