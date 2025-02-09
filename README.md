@@ -141,7 +141,7 @@ To get started with the project:
 
 ## Deployment
    
-The application is deployed on Render and can be accessed at:  
+The application is deployed on Render and can be accessed at: https://sentiment-analysis-sye8.onrender.com/   
 [![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://sentiment-analysis-sye8.onrender.com/)
 
 To deploy your own instance:
