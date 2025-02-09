@@ -137,4 +137,18 @@ To get started with the project:
 
 5. **Evaluate and Predict:**
    Use the provided scripts in the `notebook/` and `webapp/sentiment_evaluator.py` to evaluate performance and make predictions on new texts.
+   
+
+## Deployment
+   
+The application is deployed on Render and can be accessed at:  
+[![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://sentiment-analysis-sye8.onrender.com/)
+
+To deploy your own instance:
+1. Create a new Web Service on Render
+2. Connect your GitHub repository
+3. Use the following settings:
+   - **Build Command:** `pip install -r requirements.txt`
+   - **Start Command:** `gunicorn app:app`
+4. Deploy!
 
